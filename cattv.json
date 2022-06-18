@@ -1,0 +1,60 @@
+{
+  "inbounds": [
+    {
+      "port": "1080",
+      "protocol": "socks",
+      "settings": {
+        "auth": "noauth",
+        "udp": true
+      },
+      "tag": "in-0"
+    },
+    {
+      "port": "1081",
+      "protocol": "http",
+      "tag": "in-1"
+    }
+  ],
+  "log": {
+    "loglevel": "debug"
+  },
+  "outbounds": [
+    {
+      "protocol": "vmess",
+      "settings": {
+        "vnext": [
+          {
+            "address": "163.43.21.158",
+            "port": 41629,
+            "users": [
+              {
+                "alterId": 64,
+                "id": "150addef-5c1c-aa78-a2aa-0b8e6db77855"
+              }
+            ]
+          }
+        ]
+      },
+      "tag": "out-0"
+    },
+    {
+      "protocol": "freedom",
+      "settings": {},
+      "tag": "direct"
+    }
+  ],
+  "routing": {
+    "domainStrategy": "IPIfNonMatch",
+    "rules": [
+      {
+        "ip": [
+          "geoip:cn",
+          "geoip:private"
+        ],
+        "outboundTag": "direct",
+        "type": "field"
+      }
+    ]
+  }
+}
+
